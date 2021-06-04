@@ -2,6 +2,7 @@ const xlsx = require( "xlsx" );
 
 module.exports = function(fileName) {
   try{
+    const day = ['SUN', 'MON', 'TUE', 'WED', 'THR', 'FRI', 'SAT']
     const excelFile = xlsx.readFile(fileName);
     const sheetName = excelFile.SheetNames[0];
     const firstSheet = excelFile.Sheets[sheetName];
@@ -17,10 +18,11 @@ module.exports = function(fileName) {
       for(let key in jsonData[i]){
         switch(key){
           case '실적일':
-            tmp['date'] = jsonData[i][key];
+            tmp.date = jsonData[i][key];
+            tmp.day = day[new Date(tmp.date).getDay];
             break;
           case '총 공수':
-            tmp['hour'] = parseFloat(jsonData[i][key]);
+            tmp.hour = parseFloat(jsonData[i][key]);
             break;
           default:
         }
@@ -39,6 +41,7 @@ module.exports = function(fileName) {
       if (!res[value.date]) {
         res[value.date] = { 
           date: value.date,
+          day: value.day,
           hour: 0
         };
         groupingData.push(res[value.date]);
