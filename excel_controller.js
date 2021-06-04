@@ -19,7 +19,7 @@ module.exports = function(fileName) {
         switch(key){
           case '실적일':
             tmp.date = jsonData[i][key];
-            tmp.day = day[new Date(tmp.date).getDay];
+            tmp.day = day[new Date(tmp.date).getDay()];
             break;
           case '총 공수':
             tmp.hour = parseFloat(jsonData[i][key]);
