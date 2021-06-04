@@ -47,7 +47,6 @@ module.exports = function(fileName) {
       return res;
     }, {});
 
-
     console.log(groupingData);
   }
   catch(exception){
